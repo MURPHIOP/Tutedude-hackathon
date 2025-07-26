@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
-import { registerSupplier } from '../../services/auth';
 
 const SupplierSignup = () => {
   const [formData, setFormData] = useState({
@@ -23,18 +23,33 @@ const SupplierSignup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match.');
       return;
     }
+
     setLoading(true);
     setError(null);
+
     try {
-      const userData = await registerSupplier(formData);
-      login(userData);
-      navigate('/supplier-dashboard');
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/register`,
+        {
+          name: formData.companyName, // map to backend 'name'
+          email: formData.email,
+          password: formData.password,
+          role: 'supplier'
+        }
+      );
+
+      login(response.data); // optionally store token/user
+      navigate('/supplier-login');
     } catch (err) {
-      setError(err.message || 'Supplier signup failed. Please try again.');
+      setError(
+        err.response?.data?.message ||
+          'Supplier signup failed. Please try again.'
+      );
     } finally {
       setLoading(false);
     }
@@ -43,10 +58,15 @@ const SupplierSignup = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Supplier Signup</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          Supplier Signup
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="companyName">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="companyName"
+            >
               Company Name
             </label>
             <input
@@ -61,7 +81,10 @@ const SupplierSignup = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="email"
+            >
               Email Address
             </label>
             <input
@@ -76,7 +99,10 @@ const SupplierSignup = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="password">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -91,7 +117,10 @@ const SupplierSignup = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="confirmPassword">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="confirmPassword"
+            >
               Confirm Password
             </label>
             <input
@@ -105,7 +134,9 @@ const SupplierSignup = () => {
               required
             />
           </div>
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+          {error && (
+            <p className="text-red-500 text-sm text-center">{error}</p>
+          )}
           <button
             type="submit"
             disabled={loading}
@@ -117,7 +148,10 @@ const SupplierSignup = () => {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Already have a supplier account?{' '}
-            <Link to="/supplier-login" className="text-indigo-600 font-semibold hover:underline">
+            <Link
+              to="/supplier-login"
+              className="text-indigo-600 font-semibold hover:underline"
+            >
               Login here
             </Link>
           </p>

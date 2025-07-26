@@ -7,7 +7,7 @@ console.log("JWT:", process.env.JWT_SECRET); // should print your secret
 
 export const registerUser = async (req, res) => {
   try {
-    const { name, username, email, password } = req.body;
+    const { name, email, password, confirmPassword } = req.body;
 
     // Check if user exists
     const existingUser = await User.findOne({ email });
@@ -21,9 +21,9 @@ export const registerUser = async (req, res) => {
     // Create the user with default role as vendor
     const newUser = new User({
       name,
-      username,
       email,
       password: hashedPassword,
+      confirmPassword: hashedPassword,
       role: 'vendor'
     });
 
@@ -41,7 +41,6 @@ export const registerUser = async (req, res) => {
       user: {
         id: newUser._id,
         name: newUser.name,
-        username: newUser.username,
         email: newUser.email,
         role: newUser.role
       },
