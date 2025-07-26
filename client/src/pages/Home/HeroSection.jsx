@@ -1,9 +1,11 @@
 // src/pages/Home/HeroSection.jsx
 
-import React from 'react';
+import React from 'react'; // Removed useState, useEffect as image generation is removed
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
+  // Removed image generation state and effect hooks
+
   return (
     <section className="bg-white py-12 md:py-20">
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-12">
@@ -61,7 +63,7 @@ const HeroSection = () => {
         {/* Right Image/Illustration */}
         <div className="md:w-1/2 flex justify-center md:justify-end mt-8 md:mt-0">
           <img
-            src="https://placehold.co/600x400/22C55E/FFFFFF?text=Street+Vendor+Marketplace" // Updated placeholder image
+            src="https://placehold.co/600x400/22C55E/FFFFFF?text=Street+Vendor+Marketplace" // Placeholder image
             alt="Illustration of a bustling street vendor market"
             className="w-full max-w-lg rounded-lg shadow-xl"
           />
