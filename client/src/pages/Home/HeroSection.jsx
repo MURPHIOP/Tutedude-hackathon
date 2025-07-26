@@ -1,11 +1,7 @@
-// src/pages/Home/HeroSection.jsx
-
-import React from 'react'; // Removed useState, useEffect as image generation is removed
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
-  // Removed image generation state and effect hooks
-
   return (
     <section className="bg-white py-12 md:py-20">
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-12">
@@ -19,13 +15,13 @@ const HeroSection = () => {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
             <Link
-              to="/login?role=vendor"
+              to="/vendor-login"
               className="bg-green-500 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-green-600 transition duration-300"
             >
               Vendor Login
             </Link>
             <Link
-              to="/login?role=supplier"
+              to="/supplier-login"
               className="bg-white text-green-500 font-semibold py-3 px-8 rounded-lg border border-green-500 hover:bg-green-50 transition duration-300"
             >
               Supplier Login
@@ -63,8 +59,8 @@ const HeroSection = () => {
         {/* Right Image/Illustration */}
         <div className="md:w-1/2 flex justify-center md:justify-end mt-8 md:mt-0">
           <img
-            src="https://placehold.co/600x400/22C55E/FFFFFF?text=Street+Vendor+Marketplace" // Placeholder image
-            alt="Illustration of a bustling street vendor market"
+            src="http://googleusercontent.com/image_generation_content/0"
+            alt="A smiling Indian street vendor holding a basket of fresh vegetables, illustrating the success of BazaarLink users"
             className="w-full max-w-lg rounded-lg shadow-xl"
           />
         </div>

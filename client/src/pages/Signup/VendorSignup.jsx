@@ -1,11 +1,11 @@
-// src/pages/Signup/Signup.jsx
+// src/pages/Signup/VendorSignup.jsx
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { registerUser } from '../../services/auth';
+import { registerVendor } from '../../services/auth';
 
-const Signup = () => {
+const VendorSignup = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -30,11 +30,11 @@ const Signup = () => {
     setLoading(true);
     setError(null);
     try {
-      const userData = await registerUser(formData);
+      const userData = await registerVendor(formData);
       login(userData);
-      navigate('/dashboard'); // Redirect to a generic dashboard or homepage
+      navigate('/vendor-dashboard');
     } catch (err) {
-      setError(err.message || 'Signup failed. Please try again.');
+      setError(err.message || 'Vendor signup failed. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -43,7 +43,7 @@ const Signup = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Create Account</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Vendor Signup</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="name">
@@ -111,14 +111,14 @@ const Signup = () => {
             disabled={loading}
             className="w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors disabled:bg-indigo-400"
           >
-            {loading ? 'Signing up...' : 'Create Account'}
+            {loading ? 'Signing up...' : 'Create Vendor Account'}
           </button>
         </form>
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
-            Already have an account?{' '}
-            <Link to="/login" className="text-indigo-600 font-semibold hover:underline">
-              Login
+            Already have a vendor account?{' '}
+            <Link to="/vendor-login" className="text-indigo-600 font-semibold hover:underline">
+              Login here
             </Link>
           </p>
         </div>
@@ -127,4 +127,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default VendorSignup;

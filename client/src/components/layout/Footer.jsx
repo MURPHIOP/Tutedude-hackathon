@@ -1,7 +1,5 @@
-// client/src/components/layout/Footer.jsx
-
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -15,36 +13,36 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* For Vendors */}
+        {/* Quick Links */}
         <div>
-          <h4 className="font-semibold text-lg mb-4">For Vendors</h4>
+          <h4 className="font-semibold text-lg mb-4">Quick Links</h4>
           <ul className="space-y-2 text-gray-400 text-sm">
-            <li><Link to="/find-suppliers" className="hover:text-green-400">Find Suppliers</Link></li>
-            <li><Link to="/group-orders" className="hover:text-green-400">Group Orders</Link></li>
-            <li><Link to="/price-tracking" className="hover:text-green-400">Price Tracking</Link></li>
-            <li><Link to="/vendor-support" className="hover:text-green-400">Vendor Support</Link></li>
+            <li><Link to="/features" className="hover:text-green-400">Features</Link></li>
+            <li><Link to="/how-it-works" className="hover:text-green-400">How It Works</Link></li>
+            <li><Link to="/pricing" className="hover:text-green-400">Pricing</Link></li>
+            <li><Link to="/contact" className="hover:text-green-400">Contact</Link></li>
+          </ul>
+        </div>
+        
+        {/* For Vendors & Suppliers - Linked to Dashboards */}
+        <div>
+          <h4 className="font-semibold text-lg mb-4">For Users</h4>
+          <ul className="space-y-2 text-gray-400 text-sm">
+            <li><Link to="/vendor-dashboard" className="hover:text-green-400">Vendor Dashboard</Link></li>
+            <li><Link to="/supplier-dashboard" className="hover:text-green-400">Supplier Dashboard</Link></li>
+            <li><Link to="/price-trends" className="hover:text-green-400">Price Trends</Link></li>
+            <li><Link to="/reviews" className="hover:text-green-400">Reviews</Link></li>
           </ul>
         </div>
 
-        {/* For Suppliers */}
+        {/* Legal & Support */}
         <div>
-          <h4 className="font-semibold text-lg mb-4">For Suppliers</h4>
+          <h4 className="font-semibold text-lg mb-4">Legal & Support</h4>
           <ul className="space-y-2 text-gray-400 text-sm">
-            <li><Link to="/list-products" className="hover:text-green-400">List Products</Link></li>
-            <li><Link to="/manage-orders" className="hover:text-green-400">Manage Orders</Link></li>
-            <li><Link to="/analytics" className="hover:text-green-400">Analytics</Link></li>
-            <li><Link to="/supplier-support" className="hover:text-green-400">Supplier Support</Link></li>
-          </ul>
-        </div>
-
-        {/* Support */}
-        <div>
-          <h4 className="font-semibold text-lg mb-4">Support</h4>
-          <ul className="space-y-2 text-gray-400 text-sm">
-            <li><Link to="/help-center" className="hover:text-green-400">Help Center</Link></li>
-            <li><Link to="/contact-us" className="hover:text-green-400">Contact Us</Link></li>
-            <li><Link to="/privacy-policy" className="hover:text-green-400">Privacy Policy</Link></li>
-            <li><Link to="/terms-of-service" className="hover:text-green-400">Terms of Service</Link></li>
+            {/* These links require new pages and routes to be created */}
+            <li><Link to="#" className="hover:text-green-400">Privacy Policy</Link></li>
+            <li><Link to="#" className="hover:text-green-400">Terms of Service</Link></li>
+            <li><Link to="/contact" className="hover:text-green-400">Contact Us</Link></li>
           </ul>
         </div>
       </div>

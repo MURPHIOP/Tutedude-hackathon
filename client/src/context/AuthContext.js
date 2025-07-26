@@ -1,78 +1,61 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { getCurrentUser, loginUser, logoutUser, registerUser } from '../services/auth';
+// src/context/AuthContext.js
+import { createContext, useContext, useState, useEffect } from 'react';
+import { getCurrentUser } from '../services/auth';
 
+// Create the context object
 const AuthContext = createContext(null);
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
+// Create the provider component
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // State to hold authentication errors
 
   useEffect(() => {
-    const checkAuthStatus = () => {
+    // This function will fetch the user from local storage or an API
+    const fetchUser = async () => {
       try {
-        setLoading(true);
-        const user = getCurrentUser(); // Get user from local storage
+        const user = await getCurrentUser();
         setCurrentUser(user);
-      } catch (err) {
-        // This catch block handles unexpected errors during local storage access
-        console.error("Error retrieving user from local storage:", err);
-        setError("An unexpected error occurred during session check.");
-        setCurrentUser(null);
+      } catch (error) {
+        console.error('Failed to fetch current user:', error);
       } finally {
         setLoading(false);
       }
     };
-    checkAuthStatus();
+    fetchUser();
   }, []);
 
-  const login = async (credentials) => {
-    setError(null); // Clear previous errors before a new attempt
-    const response = await loginUser(credentials);
-    if (response && response.error) {
-      setError(response.error);
-      return { success: false, message: response.error };
-    }
-    setCurrentUser(response);
-    return { success: true };
+  // Login function
+  const login = (user) => {
+    setCurrentUser(user);
+    // You would also handle storing the token here
   };
 
-  const register = async (userData) => {
-    setError(null); // Clear previous errors
-    const response = await registerUser(userData);
-    if (response && response.error) {
-      setError(response.error);
-      return { success: false, message: response.error };
-    }
-    setCurrentUser(response);
-    return { success: true };
-  };
-
+  // Logout function
   const logout = () => {
-    logoutUser();
     setCurrentUser(null);
-    setError(null); // Clear any errors on logout
+    // You would also handle removing the token here
   };
 
   const value = {
     currentUser,
     loading,
-    error, // Expose error state
-    isAuthenticated: !!currentUser,
-    isVendor: currentUser?.role === 'vendor',
-    isSupplier: currentUser?.role === 'supplier',
     login,
-    register,
     logout,
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children} {/* Only render children once loading is complete */}
+      {!loading && children}
     </AuthContext.Provider>
   );
+};
+
+// Create the custom hook for components to use
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
 };
