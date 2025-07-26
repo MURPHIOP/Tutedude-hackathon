@@ -2,8 +2,11 @@ import express from 'express';
 import cors from 'cors';
 import connectDB from './src/services/mongodb.js';
 import dotenv from 'dotenv';
+dotenv.config(); 
 
-dotenv.config();
+import  authRoutes  from './src/routes/authRoutes.js'
+
+
 
 
 const app = express();
@@ -18,6 +21,9 @@ connectDB();
 app.get('/', (req, res) => {
     res.send('Server is running!');
 });
+
+// Mount the route
+app.use("/api", authRoutes); 
 
 // Start server
 app.listen(PORT, () => {

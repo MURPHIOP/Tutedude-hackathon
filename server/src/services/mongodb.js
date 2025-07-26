@@ -1,11 +1,15 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const connectDB = async () => {
-    mongoose.connection.on("connected", () => {
-        console.log("✅ MongoDB connected successfully");
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     });
-
-    await mongoose.connect( `${process.env.MONGODB_URI}/mern-auth`)
-}
+    console.log("MongoDB connected ✅");
+  } catch (error) {
+    console.error("MongoDB connection error ❌", error.message);
+  }
+};
 
 export default connectDB;
