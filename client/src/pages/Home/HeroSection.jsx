@@ -1,3 +1,5 @@
+// src/pages/Home/HeroSection.jsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -59,8 +61,8 @@ const HeroSection = () => {
         {/* Right Image/Illustration */}
         <div className="md:w-1/2 flex justify-center md:justify-end mt-8 md:mt-0">
           <img
-            src="/assets/images/hero-image.svg" // Placeholder image path
-            alt="Street food vendor market scene"
+            src="https://placehold.co/600x400/22C55E/FFFFFF?text=Street+Vendor+Marketplace" // Updated placeholder image
+            alt="Illustration of a bustling street vendor market"
             className="w-full max-w-lg rounded-lg shadow-xl"
           />
         </div>
