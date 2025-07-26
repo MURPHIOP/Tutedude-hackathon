@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext'; // Corrected import
-import { loginUser } from '../../services/auth';
+import { useAuth } from '../../context/AuthContext';
+import axios from 'axios';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +12,7 @@ const Login = () => {
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth(); // Use the corrected hook
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -23,12 +23,21 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
     try {
-      const userData = await loginUser(formData);
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/login`,
+        formData
+      );
+
+      const userData = response.data;
       login(userData);
-      navigate('/dashboard'); // Redirect to appropriate dashboard after login
+      navigate('/vendor-dashboard');
     } catch (err) {
-      setError(err.message || 'Login failed. Please check your credentials.');
+      setError(
+        err.response?.data?.message ||
+          'Login failed. Please check your credentials.'
+      );
     } finally {
       setLoading(false);
     }
@@ -37,10 +46,15 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Vendor Login</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          Vendor Login
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="email"
+            >
               Email Address
             </label>
             <input
@@ -55,7 +69,10 @@ const Login = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="password">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -69,7 +86,9 @@ const Login = () => {
               required
             />
           </div>
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+          {error && (
+            <p className="text-red-500 text-sm text-center">{error}</p>
+          )}
           <button
             type="submit"
             disabled={loading}
@@ -81,7 +100,10 @@ const Login = () => {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Don't have an account?{' '}
-            <Link to="/signup" className="text-indigo-600 font-semibold hover:underline">
+            <Link
+              to="/signup"
+              className="text-indigo-600 font-semibold hover:underline"
+            >
               Sign up
             </Link>
           </p>

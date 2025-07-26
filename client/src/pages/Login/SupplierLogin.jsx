@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
-import { loginSupplier } from '../../services/auth';
 
 const SupplierLogin = () => {
   const [formData, setFormData] = useState({
@@ -23,12 +23,20 @@ const SupplierLogin = () => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    console.log(process.env.REACT_APP_API_BASE_URL);  // for sanity check
     try {
-      const userData = await loginSupplier(formData);
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/login`,
+        formData
+      );
+
+      const userData = response.data;
       login(userData);
       navigate('/supplier-dashboard');
     } catch (err) {
-      setError(err.message || 'Supplier login failed. Please check your credentials.');
+      setError(
+        err.response?.data?.message || 'Supplier login failed. Please check your credentials.'
+      );
     } finally {
       setLoading(false);
     }
@@ -37,10 +45,15 @@ const SupplierLogin = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Supplier Login</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          Supplier Login
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="email"
+            >
               Email Address
             </label>
             <input
@@ -55,7 +68,10 @@ const SupplierLogin = () => {
             />
           </div>
           <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="password">
+            <label
+              className="block text-gray-700 text-sm font-semibold mb-2"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -81,13 +97,19 @@ const SupplierLogin = () => {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             Are you a vendor?{' '}
-            <Link to="/vendor-login" className="text-indigo-600 font-semibold hover:underline">
+            <Link
+              to="/vendor-login"
+              className="text-indigo-600 font-semibold hover:underline"
+            >
               Login here
             </Link>
           </p>
           <p className="text-sm text-gray-600 mt-2">
             Don't have a supplier account?{' '}
-            <Link to="/supplier-signup" className="text-indigo-600 font-semibold hover:underline">
+            <Link
+              to="/supplier-signup"
+              className="text-indigo-600 font-semibold hover:underline"
+            >
               Sign up
             </Link>
           </p>
