@@ -1,7 +1,7 @@
 // src/pages/Contact/Contact.jsx
 
 import React, { useState } from 'react';
-// Do not import Navbar or Footer here, as they are handled by the Layout component
+import axios from 'axios';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -24,14 +24,13 @@ const Contact = () => {
     e.preventDefault();
     setStatus('Sending...');
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log('Form submitted:', formData);
-      setStatus('Message sent successfully!');
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/contact`, formData); // Adjust endpoint as needed
+      setStatus(response.data.message || 'Message sent successfully!');
       setFormData({ name: '', email: '', subject: '', message: '' }); // Clear form
     } catch (error) {
       console.error('Error submitting form:', error);
-      setStatus('Failed to send message. Please try again.');
+      const errorMessage = error.response?.data?.error || 'Failed to send message. Please try again.';
+      setStatus(errorMessage);
     }
   };
 
