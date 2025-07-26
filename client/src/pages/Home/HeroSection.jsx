@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import img1 from '../assets/img1_hack.jpg';
 
 const HeroSection = () => {
   return (
@@ -15,13 +16,13 @@ const HeroSection = () => {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
             <Link
-              to="/vendor-login"
+              to="/login?role=vendor"
               className="bg-green-500 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-green-600 transition duration-300"
             >
               Vendor Login
             </Link>
             <Link
-              to="/supplier-login"
+              to="/login?role=supplier"
               className="bg-white text-green-500 font-semibold py-3 px-8 rounded-lg border border-green-500 hover:bg-green-50 transition duration-300"
             >
               Supplier Login
@@ -59,10 +60,10 @@ const HeroSection = () => {
         {/* Right Image/Illustration */}
         <div className="md:w-1/2 flex justify-center md:justify-end mt-8 md:mt-0">
           <img
-            src="http://googleusercontent.com/image_generation_content/0"
-            alt="A smiling Indian street vendor holding a basket of fresh vegetables, illustrating the success of BazaarLink users"
+            src={img1}
+            alt="Street food vendor market scene"
             className="w-full max-w-lg rounded-lg shadow-xl"
-          />
+           />
         </div>
       </div>
     </section>
