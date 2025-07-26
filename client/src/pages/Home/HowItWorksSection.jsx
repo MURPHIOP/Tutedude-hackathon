@@ -1,3 +1,5 @@
+// src/pages/Home/HowItWorksSection.jsx
+
 import React from 'react';
 
 const HowItWorksSection = () => {
@@ -28,7 +30,9 @@ const HowItWorksSection = () => {
         <p className="text-lg text-center text-gray-600 mb-12 max-w-2xl mx-auto">
           Simple steps to get started and transform your sourcing experience
         </p>
+
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+          {/* Left: Steps */}
           <div className="lg:w-1/2 grid grid-cols-1 gap-8">
             {steps.map((step) => (
               <div key={step.number} className="flex items-start gap-4 bg-white p-6 rounded-lg shadow-md">
@@ -46,10 +50,12 @@ const HowItWorksSection = () => {
               </div>
             ))}
           </div>
+
+          {/* Right: Image */}
           <div className="lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0">
             <img
-              src="/assets/images/img2_hack.jpg" // Placeholder image path
-              alt="Mobile app interface showing food supplier marketplace"
+              src="http://googleusercontent.com/image_generation_content/0"
+              alt="A smiling Indian street vendor holding a basket of fresh vegetables, illustrating the success of BazaarLink users"
               className="w-full max-w-md rounded-lg shadow-xl"
             />
           </div>

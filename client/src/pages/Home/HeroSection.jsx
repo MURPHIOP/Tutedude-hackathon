@@ -60,7 +60,7 @@ const HeroSection = () => {
         {/* Right Image/Illustration */}
         <div className="md:w-1/2 flex justify-center md:justify-end mt-8 md:mt-0">
           <img
-            src={img1_hack}
+            src={img1}
             alt="Street food vendor market scene"
             className="w-full max-w-lg rounded-lg shadow-xl"
            />
