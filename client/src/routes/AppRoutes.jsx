@@ -36,7 +36,7 @@ const AppRoutes = () => {
         <Route path="how-it-works" element={<HowItWorks />} />
         <Route path="pricing" element={<Pricing />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="get-started" element={<GetStarted />} />
+        <Route path="get-started" element={<GetStarted />} /> {/* This is the new route */}
         <Route path="vendor-login" element={<VendorLogin />} />
         <Route path="supplier-login" element={<SupplierLogin />} />
         <Route path="vendor-signup" element={<VendorSignup />} />

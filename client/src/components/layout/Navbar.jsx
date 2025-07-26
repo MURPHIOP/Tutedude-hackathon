@@ -1,5 +1,3 @@
-// client/src/components/layout/Navbar.jsx
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -26,14 +24,8 @@ const Navbar = () => {
           <Link to="/contact" className="hover:text-green-600 transition duration-300 ease-in-out">Contact</Link>
         </div>
         
-        {/* Desktop Action Buttons */}
+        {/* Desktop Action Button */}
         <div className="hidden md:flex space-x-4">
-          <Link
-            to="/login"
-            className="text-green-600 border border-green-600 px-6 py-2 rounded-lg font-semibold hover:bg-green-50 transition duration-300 ease-in-out"
-          >
-            Login
-          </Link>
           <Link
             to="/get-started"
             className="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition duration-300 ease-in-out"
@@ -60,17 +52,7 @@ const Navbar = () => {
             <Link to="/how-it-works" onClick={toggleMenu} className="hover:text-green-600">How it Works</Link>
             <Link to="/pricing" onClick={toggleMenu} className="hover:text-green-600">Pricing</Link>
             <Link to="/contact" onClick={toggleMenu} className="hover:text-green-600">Contact</Link>
-            <Link to="/vendor-login" onClick={toggleMenu} className="hover:text-green-600">Vendor Login</Link>
-            <Link to="/supplier-login" onClick={toggleMenu} className="hover:text-green-600">Supplier Login</Link>
-          </div>
-          <div className="mt-6 flex flex-col items-center space-y-4">
-            <Link
-              to="/get-started"
-              onClick={toggleMenu}
-              className="bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 w-2/3 text-center"
-            >
-              Get Started
-            </Link>
+            <Link to="/get-started" onClick={toggleMenu} className="hover:text-green-600">Get Started</Link>
           </div>
         </div>
       )}
