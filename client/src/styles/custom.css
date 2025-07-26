@@ -1,0 +1,83 @@
+/* src/styles/custom.css */
+
+/* Tailwind CSS directives - MUST be at the very top */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Fonts import - also good to have here */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Base styles for the entire application */
+body {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f8f9fa; /* A light background color for the entire app */
+  color: #343a40; /* Default text color */
+}
+
+/* Ensure all elements inherit box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Global container for consistent max-width and centering */
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Responsive adjustments for the container */
+@media (min-width: 640px) { /* sm breakpoint */
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) { /* lg breakpoint */
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Custom scrollbar styles (optional) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Any other specific custom styles can be added below */
+.focus-outline-green:focus {
+  outline: 2px solid #34d399;
+  outline-offset: 2px;
+}
+
+.btn-hover-scale:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease-in-out;
+}

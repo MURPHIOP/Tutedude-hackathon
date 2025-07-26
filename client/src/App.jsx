@@ -1,12 +1,16 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import AppRoutes from './routes/AppRoutes';
+// No direct CSS imports here, as custom.css is imported in index.js
+// and Tailwind is configured via postcss.config.js and tailwind.config.js
 
-function App() {
+export default function App() {
   return (
-    <div>
-      <h1>Welcome to Tutedude!</h1>
-      <p>This is your React App component.</p>
-    </div>
+    <Router>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </Router>
   );
 }
-
-export default App;
