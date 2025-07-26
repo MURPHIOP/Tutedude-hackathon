@@ -1,62 +1,85 @@
 // src/services/auth.js
 
+// Mock API functions for demonstration
 const mockApi = {
-  login: (credentials) => {
+  // Login Functions
+  loginVendor: (credentials) => {
+    // This would be your actual API call to log in a vendor
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (credentials.username === 'testvendor' && credentials.password === 'password') {
-          const mockUser = { id: 'testvendor', name: 'Rajesh', role: 'vendor', token: 'mock-vendor-token' };
-          resolve(mockUser);
-        } else if (credentials.username === 'testsupplier' && credentials.password === 'password') {
-          const mockUser = { id: 'testsupplier', name: 'Sharma Vegetable!', role: 'supplier', token: 'mock-supplier-token' };
-          resolve(mockUser);
-        }
-        else {
-          reject(new Error("Invalid username or password."));
-        }
-      }, 500);
-    });
-  },
-  register: (userData) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (userData.username) {
-          const newUser = { ...userData, id: userData.username, token: 'mock-new-user-token' };
-          resolve(newUser);
+        if (credentials.email === 'vendor@example.com' && credentials.password === 'password123') {
+          resolve({ token: 'vendor-token-123', user: { role: 'vendor', name: 'Vendor User' } });
         } else {
-          reject(new Error("Registration failed. Please provide a username."));
+          reject(new Error('Invalid vendor credentials'));
         }
       }, 500);
     });
   },
-};
+  loginSupplier: (credentials) => {
+    // This would be your actual API call to log in a supplier
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (credentials.email === 'supplier@example.com' && credentials.password === 'password123') {
+          resolve({ token: 'supplier-token-456', user: { role: 'supplier', name: 'Supplier User' } });
+        } else {
+          reject(new Error('Invalid supplier credentials'));
+        }
+      }, 500);
+    });
+  },
 
-export const loginUser = async (credentials) => {
-  try {
-    const user = await mockApi.login(credentials);
-    localStorage.setItem('user', JSON.stringify(user));
-    return user;
-  } catch (err) {
-    // Return a structured error object for consistent handling in context/components
-    return { error: err.message || "Failed to log in. Please try again." };
+  // Signup Functions
+  registerVendor: (userData) => {
+    // This would be your actual API call to register a new vendor
+    console.log('Registering new vendor:', userData);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (userData.email.includes('@')) {
+          resolve({ token: 'new-vendor-token', user: { ...userData, role: 'vendor' } });
+        } else {
+          reject(new Error('Invalid email for vendor signup'));
+        }
+      }, 500);
+    });
+  },
+  registerSupplier: (userData) => {
+    // This would be your actual API call to register a new supplier
+    console.log('Registering new supplier:', userData);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (userData.email.includes('@')) {
+          resolve({ token: 'new-supplier-token', user: { ...userData, role: 'supplier' } });
+        } else {
+          reject(new Error('Invalid email for supplier signup'));
+        }
+      }, 500);
+    });
+  },
+  
+  // Existing mock functions
+  loginUser: (credentials) => {
+    // A generic login function if you need one
+    return mockApi.loginVendor(credentials); // Default to vendor login for this example
+  },
+  registerUser: (userData) => {
+    // A generic register function if you need one
+    return mockApi.registerVendor(userData); // Default to vendor register for this example
+  },
+  getCurrentUser: () => {
+    // This would fetch a user from local storage or an API token
+    return new Promise((resolve) => setTimeout(() => resolve(null), 500));
+  },
+  logoutUser: () => {
+    return new Promise((resolve) => setTimeout(() => resolve(), 500));
   }
 };
 
-export const logoutUser = () => {
-  localStorage.removeItem('user');
-};
-
-export const registerUser = async (userData) => {
-  try {
-    const user = await mockApi.register(userData);
-    localStorage.setItem('user', JSON.stringify(user)); // Auto-login after registration
-    return user;
-  } catch (err) {
-    return { error: err.message || "Failed to register. Please try again." };
-  }
-};
-
-export const getCurrentUser = () => {
-  const user = localStorage.getItem('user');
-  return user ? JSON.parse(user) : null;
-};
+// Export all the authentication functions
+export const loginVendor = mockApi.loginVendor;
+export const loginSupplier = mockApi.loginSupplier;
+export const registerVendor = mockApi.registerVendor;
+export const registerSupplier = mockApi.registerSupplier;
+export const loginUser = mockApi.loginUser;
+export const registerUser = mockApi.registerUser;
+export const getCurrentUser = mockApi.getCurrentUser;
+export const logoutUser = mockApi.logoutUser;

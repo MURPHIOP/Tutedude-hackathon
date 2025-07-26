@@ -1,10 +1,8 @@
 // src/pages/Home/HowItWorksSection.jsx
 
-import React from 'react'; // Removed useState, useEffect as image generation is removed
+import React from 'react';
 
 const HowItWorksSection = () => {
-  // Removed image generation state and effect hooks
-
   const steps = [
     {
       number: 1,
@@ -56,8 +54,8 @@ const HowItWorksSection = () => {
           {/* Right: Image */}
           <div className="lg:w-1/2 flex justify-center lg:justify-end mt-8 lg:mt-0">
             <img
-              src="https://placehold.co/600x400/16A34A/FFFFFF?text=BazaarLink+App+Flow" // Placeholder image
-              alt="Illustration of mobile app interface showing workflow"
+              src="http://googleusercontent.com/image_generation_content/0"
+              alt="A smiling Indian street vendor holding a basket of fresh vegetables, illustrating the success of BazaarLink users"
               className="w-full max-w-md rounded-lg shadow-xl"
             />
           </div>

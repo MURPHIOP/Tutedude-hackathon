@@ -1,15 +1,31 @@
+// src/App.jsx
+
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import AppRoutes from './routes/AppRoutes';
-// No direct CSS imports here, as custom.css is imported in index.js
-// and Tailwind is configured via postcss.config.js and tailwind.config.js
+
+const AppContent = () => {
+  const { loading } = useAuth();
+
+  if (loading) {
+    // Render a loading spinner or a message while authentication is being checked
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <p className="text-xl text-gray-700">Loading...</p>
+      </div>
+    );
+  }
+
+  // Once loading is complete, render the routes
+  return <AppRoutes />;
+};
 
 export default function App() {
   return (
     <Router>
       <AuthProvider>
-        <AppRoutes />
+        <AppContent />
       </AuthProvider>
     </Router>
   );

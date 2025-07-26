@@ -1,20 +1,18 @@
-// src/pages/Signup/Signup.jsx
+// src/pages/Login/Login.jsx
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import { registerUser } from '../../services/auth';
+import { useAuth } from '../../context/AuthContext'; // Corrected import
+import { loginUser } from '../../services/auth';
 
-const Signup = () => {
+const Login = () => {
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
-    confirmPassword: '',
   });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login } = useAuth(); // Use the corrected hook
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -23,18 +21,14 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
     setLoading(true);
     setError(null);
     try {
-      const userData = await registerUser(formData);
+      const userData = await loginUser(formData);
       login(userData);
-      navigate('/dashboard'); // Redirect to a generic dashboard or homepage
+      navigate('/dashboard'); // Redirect to appropriate dashboard after login
     } catch (err) {
-      setError(err.message || 'Signup failed. Please try again.');
+      setError(err.message || 'Login failed. Please check your credentials.');
     } finally {
       setLoading(false);
     }
@@ -43,23 +37,8 @@ const Signup = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Create Account</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Vendor Login</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="name">
-              Full Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors"
-              placeholder="John Doe"
-              required
-            />
-          </div>
           <div>
             <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email">
               Email Address
@@ -90,35 +69,20 @@ const Signup = () => {
               required
             />
           </div>
-          <div>
-            <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="confirmPassword">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-colors"
-              placeholder="••••••••"
-              required
-            />
-          </div>
           {error && <p className="text-red-500 text-sm text-center">{error}</p>}
           <button
             type="submit"
             disabled={loading}
             className="w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors disabled:bg-indigo-400"
           >
-            {loading ? 'Signing up...' : 'Create Account'}
+            {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
-            Already have an account?{' '}
-            <Link to="/login" className="text-indigo-600 font-semibold hover:underline">
-              Login
+            Don't have an account?{' '}
+            <Link to="/signup" className="text-indigo-600 font-semibold hover:underline">
+              Sign up
             </Link>
           </p>
         </div>
@@ -127,4 +91,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;

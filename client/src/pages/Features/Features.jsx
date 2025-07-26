@@ -1,14 +1,12 @@
 // src/pages/Features/Features.jsx
 
 import React from 'react';
-import Navbar from '../../components/layout/Navbar.jsx';
-import Footer from '../../components/layout/Footer.jsx';
-import FeaturesSection from '../Home/FeaturesSection.jsx'; // Corrected: Path from src/pages/Features/ to src/pages/Home/
+// Do not import Navbar or Footer here, as they are handled by the Layout component
+import FeaturesSection from '../Home/FeaturesSection.jsx';
 
 const Features = () => {
   return (
     <>
-      <Navbar />
       <main className="py-12 md:py-20">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-8">
@@ -20,7 +18,6 @@ const Features = () => {
         </div>
         <FeaturesSection />
       </main>
-      <Footer />
     </>
   );
 };
