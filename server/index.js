@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config(); 
 
 import  authRoutes  from './src/routes/authRoutes.js'
+import contactRoutes from './src/routes/contactRoutes.js'
 
 
 
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 
 // Mount the route
 app.use("/api", authRoutes); 
+app.use("/api", contactRoutes); 
 
 // Start server
 app.listen(PORT, () => {
