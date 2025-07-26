@@ -1,5 +1,7 @@
+// src/pages/Home/FeaturesSection.jsx
+
 import React from 'react';
-import FeatureCard from '../../components/cards/FeatureCard';
+import FeatureCard from '../../components/cards/FeatureCard.jsx'; // Corrected: Path from src/pages/Home/ to src/components/cards/
 
 const FeaturesSection = () => {
   const features = [
@@ -44,6 +46,7 @@ const FeaturesSection = () => {
         <p className="text-lg text-center text-gray-600 mb-12 max-w-2xl mx-auto">
           We're revolutionizing how street vendors source their raw materials with smart technology and verified suppliers.
         </p>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <FeatureCard
