@@ -21,6 +21,8 @@ import DashboardLayout from '../components/dashboard/DashboardLayout.jsx';
 import DashboardSwitch from '../pages/DashboardSwitch.jsx';
 import Reviews from '../pages/Reviews/Reviews.jsx';
 import PriceTrends from '../pages/PriceTrends/PriceTrends.jsx';
+import SupplierDashboard from '../pages/SupplierDashboard/SupplierDashboard.jsx';
+import VendorDashboard from '../pages/VendorDashboard/VendorDashboard.jsx';
 
 const AppRoutes = () => {
   return (
@@ -37,16 +39,12 @@ const AppRoutes = () => {
         <Route path="supplier-login" element={<SupplierLogin />} />
         <Route path="vendor-signup" element={<VendorSignup />} />
         <Route path="supplier-signup" element={<SupplierSignup />} />
+        <Route path='supplier-dashboard' element={<SupplierDashboard/>}/>
+        <Route path='vendor-dashboard' element={<VendorDashboard/>}/>
       </Route>
 
       {/* Authenticated Dashboard Routes */}
       {/* The DashboardLayout will render for all child routes */}
-      <Route path="/dashboard" element={<DashboardLayout />}>
-        <Route index element={<DashboardSwitch />} />
-        <Route path="reviews" element={<Reviews />} />
-        <Route path="price-trends" element={<PriceTrends />} />
-      </Route>
-      
       {/* A catch-all route for 404 pages */}
       <Route path="*" element={<div>404 Page Not Found</div>} />
     </Routes>
