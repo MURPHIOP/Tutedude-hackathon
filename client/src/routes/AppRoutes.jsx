@@ -4,7 +4,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from '../components/layout/Layout.jsx';
 
-// Import all your page components
+// Page Components
 import Home from '../pages/Home/Home.jsx';
 import Features from '../pages/Features/Features.jsx';
 import HowItWorks from '../pages/HowItWorks/HowItWorks.jsx';
@@ -27,7 +27,7 @@ import VendorDashboard from '../pages/VendorDashboard/VendorDashboard.jsx';
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Public Routes with Navbar and Footer */}
+      {/* Public Routes with Layout */}
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="features" element={<Features />} />
@@ -41,7 +41,7 @@ const AppRoutes = () => {
         <Route path="supplier-signup" element={<SupplierSignup />} />
       </Route>
 
-      {/* Authenticated Dashboard Routes with their own layout */}
+      {/* Dashboard Routes */}
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<DashboardSwitch />} />
         <Route path="reviews" element={<Reviews />} />
@@ -50,7 +50,7 @@ const AppRoutes = () => {
         <Route path="supplier-dashboard" element={<SupplierDashboard />} />
       </Route>
 
-      {/* A catch-all route for 404 pages */}
+      {/* Catch-All */}
       <Route path="*" element={<div>404 Page Not Found</div>} />
     </Routes>
   );

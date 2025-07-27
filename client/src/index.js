@@ -1,29 +1,28 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client'; // Use createRoot for React 18+
-import App from './App'; // Import your main App component
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import { BrowserRouter as Router } from 'react-router-dom'; // Import BrowserRouter
+import App from './App';
 
-// Import global CSS files. These paths are relative to index.js
+// Global styles
 import './index.css';
 import './styles/custom.css';
 
-// Get the root DOM element where the React app will be mounted.
+// Mount point
 const rootElement = document.getElementById('root');
 
-// Create a React root and render the App component into it.
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <React.StrictMode>
-      <Router> {/* BrowserRouter wraps the entire App */}
-           <AuthProvider>
-                <App />
-              </AuthProvider>
-      </Router>
+      <BrowserRouter>
+        <AuthProvider>
+          <App />
+        </AuthProvider>
+      </BrowserRouter>
     </React.StrictMode>
   );
 } else {
-  console.error("Root element with ID 'root' not found in the document.");
+  console.error("❌ Root element with ID 'root' not found in the document.");
 }
 
