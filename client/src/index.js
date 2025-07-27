@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client'; // Use createRoot for React 18+
 import App from './App'; // Import your main App component
+import { AuthProvider } from './context/AuthContext';
 import { BrowserRouter as Router } from 'react-router-dom'; // Import BrowserRouter
 
 // Import global CSS files. These paths are relative to index.js
@@ -16,7 +17,9 @@ if (rootElement) {
   root.render(
     <React.StrictMode>
       <Router> {/* BrowserRouter wraps the entire App */}
-        <App />
+           <AuthProvider>
+                <App />
+              </AuthProvider>
       </Router>
     </React.StrictMode>
   );
