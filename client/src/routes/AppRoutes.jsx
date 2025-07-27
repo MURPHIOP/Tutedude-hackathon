@@ -25,30 +25,35 @@ import SupplierDashboard from '../pages/SupplierDashboard/SupplierDashboard.jsx'
 import VendorDashboard from '../pages/VendorDashboard/VendorDashboard.jsx';
 
 const AppRoutes = () => {
-return (
-<Routes>
-{/* Public Routes with Navbar and Footer */}
-<Route path="/" element={<Layout />}>
-<Route index element={<Home />} />
-<Route path="features" element={<Features />} />
-<Route path="how-it-works" element={<HowItWorks />} />
-<Route path="pricing" element={<Pricing />} />
-<Route path="contact" element={<Contact />} />
-<Route path="get-started" element={<GetStarted />} />
-<Route path="vendor-login" element={<VendorLogin />} />
-<Route path="supplier-login" element={<SupplierLogin />} />
-<Route path="vendor-signup" element={<VendorSignup />} />
-<Route path="supplier-signup" element={<SupplierSignup />} />
-<Route path='supplier-dashboard' element={<SupplierDashboard/>}/>
-<Route path='vendor-dashboard' element={<VendorDashboard/>}/>
-</Route>
+  return (
+    <Routes>
+      {/* Public Routes with Navbar and Footer */}
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="features" element={<Features />} />
+        <Route path="how-it-works" element={<HowItWorks />} />
+        <Route path="pricing" element={<Pricing />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="get-started" element={<GetStarted />} />
+        <Route path="vendor-login" element={<VendorLogin />} />
+        <Route path="supplier-login" element={<SupplierLogin />} />
+        <Route path="vendor-signup" element={<VendorSignup />} />
+        <Route path="supplier-signup" element={<SupplierSignup />} />
+      </Route>
 
-{/* Authenticated Dashboard Routes */}
-{/* The DashboardLayout will render for all child routes */}
-{/* A catch-all route for 404 pages */}
-<Route path="*" element={<div>404 Page Not Found</div>} />
-</Routes>
-);
+      {/* Authenticated Dashboard Routes with their own layout */}
+      <Route path="/dashboard" element={<DashboardLayout />}>
+        <Route index element={<DashboardSwitch />} />
+        <Route path="reviews" element={<Reviews />} />
+        <Route path="price-trends" element={<PriceTrends />} />
+        <Route path="vendor-dashboard" element={<VendorDashboard />} />
+        <Route path="supplier-dashboard" element={<SupplierDashboard />} />
+      </Route>
+
+      {/* A catch-all route for 404 pages */}
+      <Route path="*" element={<div>404 Page Not Found</div>} />
+    </Routes>
+  );
 };
 
 export default AppRoutes;
