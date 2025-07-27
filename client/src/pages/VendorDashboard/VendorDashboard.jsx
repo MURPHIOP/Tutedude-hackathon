@@ -1,7 +1,10 @@
+// src/pages/VendorDashboard/VendorDashboard.jsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
+import DashboardLayout from '../../components/dashboard/DashboardLayout.jsx'; // Make sure this path is correct
 
-const VendorDashboard = () => {
+const VendorDashboardContent = () => {
   const recentGroupOrders = [
     { id: 'GR-101', item: 'Fresh Produce', price: '₹5,000', vendors: 5, status: 'Active' },
     { id: 'GR-102', item: 'Cooking Oil', price: '₹8,500', vendors: 3, status: 'Shipped' },
@@ -13,7 +16,7 @@ const VendorDashboard = () => {
     { name: 'Patel Brothers', rating: 4.5, location: 'Mumbai' },
     { name: 'Spice World', rating: 4.9, location: 'Delhi' },
   ];
-  
+
   const getStatusClasses = (status) => {
     switch (status) {
       case 'Active':
@@ -106,7 +109,7 @@ const VendorDashboard = () => {
           </table>
         </div>
       </div>
-      
+
       {/* Recommended Suppliers Section */}
       <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-200">
         <div className="flex justify-between items-center mb-6">
@@ -117,14 +120,14 @@ const VendorDashboard = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {recommendedSuppliers.map(supplier => (
-            <div 
-              key={supplier.name} 
+            <div
+              key={supplier.name}
               className="flex items-center space-x-4 p-5 border border-gray-200 rounded-xl bg-gray-50 hover:shadow-lg transition-all duration-300 cursor-pointer"
             >
-              <img 
-                src="https://via.placeholder.com/60" 
-                alt={supplier.name} 
-                className="rounded-full w-14 h-14 object-cover border-2 border-gray-200" 
+              <img
+                src="https://via.placeholder.com/60"
+                alt={supplier.name}
+                className="rounded-full w-14 h-14 object-cover border-2 border-gray-200"
               />
               <div>
                 <h3 className="text-lg font-semibold text-gray-900">{supplier.name}</h3>
@@ -138,6 +141,14 @@ const VendorDashboard = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const VendorDashboard = () => {
+  return (
+    <DashboardLayout>
+      <VendorDashboardContent />
+    </DashboardLayout>
   );
 };
 
