@@ -10,19 +10,15 @@ import Features from '../pages/Features/Features.jsx';
 import HowItWorks from '../pages/HowItWorks/HowItWorks.jsx';
 import Pricing from '../pages/Pricing/Pricing.jsx';
 import Contact from '../pages/Contact/Contact.jsx';
-
-// New Signup Page
 import GetStarted from '../pages/Signup/GetStarted.jsx';
-
-// Specific Login & Signup Pages
 import VendorLogin from '../pages/Login/VendorLogin.jsx';
 import SupplierLogin from '../pages/Login/SupplierLogin.jsx';
 import VendorSignup from '../pages/Signup/VendorSignup.jsx';
 import SupplierSignup from '../pages/Signup/SupplierSignup.jsx';
 
-// Authenticated Pages
-import VendorDashboard from '../pages/VendorDashboard/VendorDashboard.jsx';
-import SupplierDashboard from '../pages/SupplierDashboard/SupplierDashboard.jsx';
+// Dashboard Components
+import DashboardLayout from '../components/dashboard/DashboardLayout.jsx';
+import DashboardSwitch from '../pages/DashboardSwitch.jsx';
 import Reviews from '../pages/Reviews/Reviews.jsx';
 import PriceTrends from '../pages/PriceTrends/PriceTrends.jsx';
 
@@ -36,19 +32,21 @@ const AppRoutes = () => {
         <Route path="how-it-works" element={<HowItWorks />} />
         <Route path="pricing" element={<Pricing />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="get-started" element={<GetStarted />} /> {/* This is the new route */}
+        <Route path="get-started" element={<GetStarted />} />
         <Route path="vendor-login" element={<VendorLogin />} />
         <Route path="supplier-login" element={<SupplierLogin />} />
         <Route path="vendor-signup" element={<VendorSignup />} />
         <Route path="supplier-signup" element={<SupplierSignup />} />
       </Route>
 
-      {/* Authenticated Routes */}
-      <Route path="/vendor-dashboard" element={<VendorDashboard />} />
-      <Route path="/supplier-dashboard" element={<SupplierDashboard />} />
-      <Route path="/reviews" element={<Reviews />} />
-      <Route path="/price-trends" element={<PriceTrends />} />
-
+      {/* Authenticated Dashboard Routes */}
+      {/* The DashboardLayout will render for all child routes */}
+      <Route path="/dashboard" element={<DashboardLayout />}>
+        <Route index element={<DashboardSwitch />} />
+        <Route path="reviews" element={<Reviews />} />
+        <Route path="price-trends" element={<PriceTrends />} />
+      </Route>
+      
       {/* A catch-all route for 404 pages */}
       <Route path="*" element={<div>404 Page Not Found</div>} />
     </Routes>
