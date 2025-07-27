@@ -1,39 +1,42 @@
+// src/pages/SupplierDashboard/SupplierDashboard.jsx
+
 import React from 'react';
 import { Link } from 'react-router-dom';
+import DashboardLayout from '../../components/dashboard/DashboardLayout.jsx'; // Make sure this path is correct
 
-const bestSellers = [
-  {
-    name: "Amit Kirana Store",
-    location: "Delhi",
-    rating: 4.5,
-    vegetables: [
-      { name: "Tomato", price: "₹30/kg" },
-      { name: "Potato", price: "₹20/kg" },
-      { name: "Onion", price: "₹28/kg" },
-    ]
-  },
-  {
-    name: "Fresh Veggies Mart",
-    location: "Noida",
-    rating: 4.2,
-    vegetables: [
-      { name: "Carrot", price: "₹40/kg" },
-      { name: "Cabbage", price: "₹25/kg" },
-      { name: "Capsicum", price: "₹50/kg" },
-    ]
-  },
-  {
-    name: "Green Cart",
-    location: "Gurugram",
-    rating: 4.8,
-    vegetables: [
-      { name: "Spinach", price: "₹15/bunch" },
-      { name: "Cauliflower", price: "₹35/kg" },
-    ]
-  }
-];
+const SupplierDashboardContent = () => {
+  const bestSellers = [
+    {
+      name: "Amit Kirana Store",
+      location: "Delhi",
+      rating: 4.5,
+      vegetables: [
+        { name: "Tomato", price: "₹30/kg" },
+        { name: "Potato", price: "₹20/kg" },
+        { name: "Onion", price: "₹28/kg" },
+      ]
+    },
+    {
+      name: "Fresh Veggies Mart",
+      location: "Noida",
+      rating: 4.2,
+      vegetables: [
+        { name: "Carrot", price: "₹40/kg" },
+        { name: "Cabbage", price: "₹25/kg" },
+        { name: "Capsicum", price: "₹50/kg" },
+      ]
+    },
+    {
+      name: "Green Cart",
+      location: "Gurugram",
+      rating: 4.8,
+      vegetables: [
+        { name: "Spinach", price: "₹15/bunch" },
+        { name: "Cauliflower", price: "₹35/kg" },
+      ]
+    }
+  ];
 
-const SupplierDashboard = () => {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Dashboard Stats */}
@@ -79,8 +82,8 @@ const SupplierDashboard = () => {
         <h2 className="text-2xl font-bold text-gray-800 mb-6">Best Sellers Near You</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {bestSellers.map((seller, idx) => (
-            <div 
-              key={idx} 
+            <div
+              key={idx}
               className="border border-gray-200 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-gray-50 cursor-pointer"
             >
               <div className="flex items-center justify-between mb-2">
@@ -114,7 +117,15 @@ const SupplierDashboard = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
+  );
+};
+
+const SupplierDashboard = () => {
+  return (
+    <DashboardLayout>
+      <SupplierDashboardContent />
+    </DashboardLayout>
   );
 };
 
