@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 const bestSellers = [
   {
     name: "Amit Kirana Store",
@@ -33,47 +35,77 @@ const bestSellers = [
 
 const SupplierDashboard = () => {
   return (
-    <>
+    <div className="space-y-8 animate-fadeIn">
       {/* Dashboard Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <p className="text-gray-500 text-sm">Active Orders</p>
-          <p className="text-3xl font-bold text-gray-800 mt-1">45</p>
-          <p className="text-sm text-green-500 mt-2">+10% since last month</p>
+        {/* Stat Card 1 */}
+        <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-200 transition-transform transform hover:scale-105 duration-300">
+          <p className="text-gray-500 text-sm font-medium">Active Orders</p>
+          <p className="text-4xl font-bold text-gray-900 mt-2">45</p>
+          <p className="text-sm text-green-600 mt-1 flex items-center">
+            <span className="inline-block w-2 h-2 mr-1 bg-green-500 rounded-full animate-pulse"></span>
+            +10% since last month
+          </p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <p className="text-gray-500 text-sm">Today's Sales</p>
-          <p className="text-3xl font-bold text-gray-800 mt-1">₹25,450</p>
-          <p className="text-sm text-red-500 mt-2">-5% since yesterday</p>
+        {/* Stat Card 2 */}
+        <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-200 transition-transform transform hover:scale-105 duration-300">
+          <p className="text-gray-500 text-sm font-medium">Today's Sales</p>
+          <p className="text-4xl font-bold text-gray-900 mt-2">₹25,450</p>
+          <p className="text-sm text-red-600 mt-1 flex items-center">
+            <span className="inline-block w-2 h-2 mr-1 bg-red-500 rounded-full"></span>
+            -5% since yesterday
+          </p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <p className="text-gray-500 text-sm">New Inquiries</p>
-          <p className="text-3xl font-bold text-gray-800 mt-1">12</p>
-          <p className="text-sm text-green-500 mt-2">+2 since yesterday</p>
+        {/* Stat Card 3 */}
+        <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-200 transition-transform transform hover:scale-105 duration-300">
+          <p className="text-gray-500 text-sm font-medium">New Inquiries</p>
+          <p className="text-4xl font-bold text-gray-900 mt-2">12</p>
+          <p className="text-sm text-green-600 mt-1">
+            +2 since yesterday
+          </p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <p className="text-gray-500 text-sm">Inventory Items</p>
-          <p className="text-3xl font-bold text-gray-800 mt-1">21</p>
-          <p className="text-sm text-gray-500 mt-2">Manage all inventory</p>
+        {/* Stat Card 4 */}
+        <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-200 transition-transform transform hover:scale-105 duration-300">
+          <p className="text-gray-500 text-sm font-medium">Inventory Items</p>
+          <p className="text-4xl font-bold text-gray-900 mt-2">21</p>
+          <p className="text-sm text-gray-600 mt-1">
+            Manage all inventory
+          </p>
         </div>
       </div>
 
       {/* Best Sellers Near You */}
-      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Best Sellers Near You</h2>
+      <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-200">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">Best Sellers Near You</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {bestSellers.map((seller, idx) => (
-            <div key={idx} className="border p-4 rounded-lg shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-800">{seller.name}</h3>
-              <p className="text-gray-500 text-sm">📍 {seller.location}</p>
-              <p className="text-yellow-500 text-sm mb-2">⭐ {seller.rating} / 5</p>
+            <div 
+              key={idx} 
+              className="border border-gray-200 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-gray-50 cursor-pointer"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-xl font-semibold text-gray-900">{seller.name}</h3>
+                <span className="bg-yellow-100 text-yellow-700 text-sm font-bold px-3 py-1 rounded-full flex items-center">
+                  <span className="text-yellow-400 mr-1">★</span> {seller.rating}
+                </span>
+              </div>
+              <p className="text-gray-500 text-sm flex items-center mb-4">
+                <span className="text-gray-400 mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </span>
+                {seller.location}
+              </p>
 
-              <div className="mt-2">
-                <h4 className="text-sm font-bold text-gray-700 mb-1">Vegetables Available:</h4>
-                <ul className="list-disc list-inside text-sm text-gray-600">
+              <div className="mt-4">
+                <h4 className="text-sm font-bold text-gray-700 mb-2">Vegetables Available:</h4>
+                <ul className="space-y-1">
                   {seller.vegetables.map((veg, index) => (
-                    <li key={index}>
-                      {veg.name} - <span className="font-semibold">{veg.price}</span>
+                    <li key={index} className="flex justify-between text-sm text-gray-600 border-b border-gray-100 pb-1 last:border-b-0">
+                      <span>{veg.name}</span>
+                      <span className="font-semibold text-gray-800">{veg.price}</span>
                     </li>
                   ))}
                 </ul>
