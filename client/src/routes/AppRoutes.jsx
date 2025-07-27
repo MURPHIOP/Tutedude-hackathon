@@ -43,6 +43,7 @@ const AppRoutes = () => {
 
       {/* Authenticated Dashboard Routes with their own layout */}
       <Route path="/dashboard" element={<DashboardLayout />}>
+        {/* This `index` route is CRUCIAL for the /dashboard URL to not give a 404 */}
         <Route index element={<DashboardSwitch />} />
         <Route path="reviews" element={<Reviews />} />
         <Route path="price-trends" element={<PriceTrends />} />
