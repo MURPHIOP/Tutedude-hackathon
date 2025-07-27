@@ -114,7 +114,7 @@ const SupplierDashboard = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
