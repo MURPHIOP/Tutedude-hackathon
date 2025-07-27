@@ -5,9 +5,9 @@ import { Outlet, NavLink, Link } from 'react-router-dom';
 
 const Sidebar = () => {
   const navLinks = [
-    { to: '/vendor-dashboard', text: 'Dashboard' },
-    { to: '/reviews', text: 'Reviews' },
-    { to: '/price-trends', text: 'Price Trends' },
+    { to: '/dashboard/vendor-dashboard', text: 'Dashboard' },
+    { to: '/dashboard/reviews', text: 'Reviews' },
+    { to: '/dashboard/price-trends', text: 'Price Trends' },
   ];
 
   return (
@@ -53,7 +53,7 @@ const DashboardLayout = () => {
         <header className="bg-white shadow-sm p-4 sticky top-0 z-10">
           <div className="container mx-auto flex justify-between items-center">
             <h1 className="text-2xl font-bold text-gray-800">
-              Welcome back, Rajesh!
+              Welcome back, User!
             </h1>
             <div className="flex items-center space-x-4">
               <input
@@ -69,7 +69,6 @@ const DashboardLayout = () => {
             </div>
           </div>
         </header>
-        {/* Added more padding here for the gap */}
         <main className="flex-1 p-8">
           <Outlet />
         </main>
