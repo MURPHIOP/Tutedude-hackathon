@@ -12,7 +12,7 @@ const SupplierDashboardContent = () => {
       rating: 4.5,
       vegetables: [
         { name: "Tomato", price: "₹30/kg" },
-        { name: "Potato", price: "₹20/kg" },
+        { name: "Potato", price: "₹40/kg" },
         { name: "Onion", price: "₹28/kg" },
       ]
     },
