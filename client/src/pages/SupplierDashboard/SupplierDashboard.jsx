@@ -118,8 +118,6 @@ const SupplierDashboardContent = () => {
         </div>
       </div>
     </div>
-<<<<<<< HEAD
-=======
   );
 };
 
@@ -128,7 +126,6 @@ const SupplierDashboard = () => {
     <DashboardLayout>
       <SupplierDashboardContent />
     </DashboardLayout>
->>>>>>> e7a974365f7efd592dc7783fe329c7727800806f
   );
 };
 
