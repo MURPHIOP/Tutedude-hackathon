@@ -1,17 +1,41 @@
-// src/pages/SupplierDashboard/SupplierDashboard.jsx
-
 import React from 'react';
 import { Link } from 'react-router-dom';
+const bestSellers = [
+  {
+    name: "Amit Kirana Store",
+    location: "Delhi",
+    rating: 4.5,
+    vegetables: [
+      { name: "Tomato", price: "₹30/kg" },
+      { name: "Potato", price: "₹20/kg" },
+      { name: "Onion", price: "₹28/kg" },
+    ]
+  },
+  {
+    name: "Fresh Veggies Mart",
+    location: "Noida",
+    rating: 4.2,
+    vegetables: [
+      { name: "Carrot", price: "₹40/kg" },
+      { name: "Cabbage", price: "₹25/kg" },
+      { name: "Capsicum", price: "₹50/kg" },
+    ]
+  },
+  {
+    name: "Green Cart",
+    location: "Gurugram",
+    rating: 4.8,
+    vegetables: [
+      { name: "Spinach", price: "₹15/bunch" },
+      { name: "Cauliflower", price: "₹35/kg" },
+    ]
+  }
+];
 
 const SupplierDashboard = () => {
-  const recentOrders = [
-    { id: 'ORD-987', vendor: 'Amit Kirana', amount: '₹12,450', status: 'Pending' },
-    { id: 'ORD-986', vendor: 'Pooja Tiffin', amount: '₹8,100', status: 'Delivered' },
-    { id: 'ORD-985', vendor: 'Rajesh Sweets', amount: '₹1,500', status: 'Shipped' },
-  ];
-
   return (
     <>
+      {/* Dashboard Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div className="bg-white p-6 rounded-lg shadow-md">
           <p className="text-gray-500 text-sm">Active Orders</p>
@@ -35,55 +59,28 @@ const SupplierDashboard = () => {
         </div>
       </div>
 
-      {/* Recent Orders Section */}
+      {/* Best Sellers Near You */}
       <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-bold text-gray-800">Recent Orders</h2>
-          <Link to="/supplier-orders" className="text-green-600 hover:underline">View All</Link>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order ID</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vendor</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {recentOrders.map(order => (
-                <tr key={order.id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{order.id}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.vendor}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.amount}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      order.status === 'Delivered' ? 'bg-green-100 text-green-800' :
-                      order.status === 'Shipped' ? 'bg-blue-100 text-blue-800' : 'bg-yellow-100 text-yellow-800'
-                    }`}>
-                      {order.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <Link to={`/supplier-orders/${order.id}`} className="text-green-600 hover:text-green-900">View</Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-      
-      {/* Inventory Status */}
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Inventory Status</h2>
-        <div className="flex justify-between items-center">
-          <p className="text-gray-600">Your current inventory is well-stocked. Manage your products to avoid shortages.</p>
-          <button className="bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition-colors">
-            Manage Inventory
-          </button>
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Best Sellers Near You</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {bestSellers.map((seller, idx) => (
+            <div key={idx} className="border p-4 rounded-lg shadow-sm">
+              <h3 className="text-xl font-semibold text-gray-800">{seller.name}</h3>
+              <p className="text-gray-500 text-sm">📍 {seller.location}</p>
+              <p className="text-yellow-500 text-sm mb-2">⭐ {seller.rating} / 5</p>
+
+              <div className="mt-2">
+                <h4 className="text-sm font-bold text-gray-700 mb-1">Vegetables Available:</h4>
+                <ul className="list-disc list-inside text-sm text-gray-600">
+                  {seller.vegetables.map((veg, index) => (
+                    <li key={index}>
+                      {veg.name} - <span className="font-semibold">{veg.price}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </>
