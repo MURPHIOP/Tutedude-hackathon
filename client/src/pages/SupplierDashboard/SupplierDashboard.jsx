@@ -126,6 +126,10 @@ const SupplierDashboard = () => {
     <DashboardLayout>
       <SupplierDashboardContent />
     </DashboardLayout>
+<<<<<<< HEAD
+=======
+
+>>>>>>> a332267 (SUPPLIER ERROR FIX)
   );
 };
 
