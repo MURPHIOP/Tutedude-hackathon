@@ -4,7 +4,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from '../components/layout/Layout.jsx';
 
-// Public Pages
+// Import all your page components
 import Home from '../pages/Home/Home.jsx';
 import Features from '../pages/Features/Features.jsx';
 import HowItWorks from '../pages/HowItWorks/HowItWorks.jsx';
@@ -25,36 +25,30 @@ import SupplierDashboard from '../pages/SupplierDashboard/SupplierDashboard.jsx'
 import VendorDashboard from '../pages/VendorDashboard/VendorDashboard.jsx';
 
 const AppRoutes = () => {
-  return (
-    <Routes>
-      {/* Public Routes with Navbar and Footer */}
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="features" element={<Features />} />
-        <Route path="how-it-works" element={<HowItWorks />} />
-        <Route path="pricing" element={<Pricing />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="get-started" element={<GetStarted />} />
-        <Route path="vendor-login" element={<VendorLogin />} />
-        <Route path="supplier-login" element={<SupplierLogin />} />
-        <Route path="vendor-signup" element={<VendorSignup />} />
-        <Route path="supplier-signup" element={<SupplierSignup />} />
-      </Route>
+return (
+<Routes>
+{/* Public Routes with Navbar and Footer */}
+<Route path="/" element={<Layout />}>
+<Route index element={<Home />} />
+<Route path="features" element={<Features />} />
+<Route path="how-it-works" element={<HowItWorks />} />
+<Route path="pricing" element={<Pricing />} />
+<Route path="contact" element={<Contact />} />
+<Route path="get-started" element={<GetStarted />} />
+<Route path="vendor-login" element={<VendorLogin />} />
+<Route path="supplier-login" element={<SupplierLogin />} />
+<Route path="vendor-signup" element={<VendorSignup />} />
+<Route path="supplier-signup" element={<SupplierSignup />} />
+<Route path='supplier-dashboard' element={<SupplierDashboard/>}/>
+<Route path='vendor-dashboard' element={<VendorDashboard/>}/>
+</Route>
 
-      {/* Authenticated Dashboard Routes with the DashboardLayout */}
-      <Route path="/dashboard" element={<DashboardLayout />}>
-        {/* Use the DashboardSwitch component to show the right dashboard by default */}
-        <Route index element={<DashboardSwitch />} />
-        <Route path="reviews" element={<Reviews />} />
-        <Route path="price-trends" element={<PriceTrends />} />
-        <Route path="vendor-dashboard" element={<VendorDashboard />} />
-        <Route path="supplier-dashboard" element={<SupplierDashboard />} />
-      </Route>
-
-      {/* A catch-all route for 404 pages */}
-      <Route path="*" element={<div>404 Page Not Found</div>} />
-    </Routes>
-  );
+{/* Authenticated Dashboard Routes */}
+{/* The DashboardLayout will render for all child routes */}
+{/* A catch-all route for 404 pages */}
+<Route path="*" element={<div>404 Page Not Found</div>} />
+</Routes>
+);
 };
 
 export default AppRoutes;
